@@ -1,3 +1,4 @@
+import json
 from bidict import bidict
 from typing import List, Dict
 
@@ -111,56 +112,62 @@ class UserMapper(Mapper):
         }
     )
 
+    def to_dto(self, json_string) -> Dict:
+        return UserDTO(**super().to_dto(json.loads(json_string)))
 
-data = {
-    "id": "625cf4a6a7d9d34012f70d123",
-    "email": "test@example.com",
-    "name": "Test User",
-    "memberships": [
-        {
-            "userId": "625cf4a6a7d9d34012f70de1",
-            "hourlyRate": None,
-            "costRate": None,
-            "targetId": "625cf4a6a7d9d34012f70de2",
-            "membershipType": "WORKSPACE",
-            "membershipStatus": "ACTIVE",
-        }
-    ],
-    "profilePicture": "https://img.clockify.me/no-user-image.png",
-    "activeWorkspace": "625cf4a6a7d9d34012f70de2",
-    "defaultWorkspace": "625cf4a6a7d9d34012f70de2",
-    "settings": {
-        "weekStart": "MONDAY",
-        "timeZone": "Europe/Amsterdam",
-        "timeFormat": "HOUR24",
-        "dateFormat": "DD/MM/YYYY",
-        "sendNewsletter": False,
-        "weeklyUpdates": True,
-        "longRunning": True,
-        "scheduledReports": True,
-        "approval": True,
-        "pto": True,
-        "alerts": True,
-        "reminders": True,
-        "timeTrackingManual": True,
-        "summaryReportSettings": {"group": "Project", "subgroup": "Time Entry"},
-        "isCompactViewOn": False,
-        "dashboardSelection": "ME",
-        "dashboardViewType": "PROJECT",
-        "dashboardPinToTop": False,
-        "projectListCollapse": 50,
-        "collapseAllProjectLists": False,
-        "groupSimilarEntriesDisabled": False,
-        "myStartOfDay": "09:00",
-        "projectPickerTaskFilter": False,
-        "lang": "EN",
-        "multiFactorEnabled": False,
-        "theme": "DEFAULT",
-        "scheduling": True,
-    },
-    "status": "ACTIVE",
-}
-mapper = UserMapper()
-dto = UserDTO(**mapper.to_dto(data))
+
+data = """{
+	"id": "626399702993d4192cb61234",
+	"email": "test@example.com",
+	"name": "Test User",
+	"memberships": [
+		{
+			"userId": "626399702993d4192cb61234",
+			"hourlyRate": null,
+			"costRate": null,
+			"targetId": "626399702993d4192cb61a9a",
+			"membershipType": "WORKSPACE",
+			"membershipStatus": "ACTIVE"
+		}
+	],
+	"profilePicture": "https://img.clockify.me/no-user-image.png",
+	"activeWorkspace": "626399702993d4192cb61a9a",
+	"defaultWorkspace": "626399702993d4192cb61a9a",
+	"settings": {
+		"weekStart": "MONDAY",
+		"timeZone": "Europe/Amsterdam",
+		"timeFormat": "HOUR24",
+		"dateFormat": "DD/MM/YYYY",
+		"sendNewsletter": false,
+		"weeklyUpdates": true,
+		"longRunning": true,
+		"scheduledReports": true,
+		"approval": true,
+		"pto": true,
+		"alerts": true,
+		"reminders": true,
+		"timeTrackingManual": false,
+		"summaryReportSettings": {
+			"group": "Project",
+			"subgroup": "Time Entry"
+		},
+		"isCompactViewOn": false,
+		"dashboardSelection": "ME",
+		"dashboardViewType": "PROJECT",
+		"dashboardPinToTop": false,
+		"projectListCollapse": 50,
+		"collapseAllProjectLists": false,
+		"groupSimilarEntriesDisabled": false,
+		"myStartOfDay": "09:00",
+		"projectPickerTaskFilter": false,
+		"lang": "EN",
+		"multiFactorEnabled": false,
+		"theme": "DEFAULT",
+		"scheduling": true
+	},
+	"status": "ACTIVE"
+}"""
+
+dto = UserMapper().to_dto(data)
 user = User(dto)
 print(user)
