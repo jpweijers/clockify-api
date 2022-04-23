@@ -6,10 +6,8 @@ from clockify.wrapper import Wrapper
 
 
 class UserWrapper(Wrapper):
-    PATH = "user"
+    path = "user"
 
     def get_current_user(self):
-        url = "/".join([self.BASE_URL, self.PATH])
-        res = self.get(url)
-        dto = UserMapper().to_dto(res)
-        return UserDTO(**dto)
+        url = "/".join([self.base_url, self.path])
+        return self.get_one(url, UserMapper, UserDTO)

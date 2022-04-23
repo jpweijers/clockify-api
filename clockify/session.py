@@ -5,8 +5,8 @@ from clockify.user.user_wrapper import UserWrapper
 
 
 class ClockifySession(UserWrapper, ClientWrapper):
-    BASE_URL = "https://api.clockify.me/api/v1"
+    base_url = "https://api.clockify.me/api/v1"
 
-    def __init__(self, key):
+    def __init__(self, key: str) -> None:
         self.session = requests.Session()
         self.session.headers.update({"x-api-key": key})
