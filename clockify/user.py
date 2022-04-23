@@ -74,19 +74,6 @@ class UserDTO:
         self.status = status
 
 
-class User(UserMeta):
-    def __init__(self, user: UserDTO):
-        self.id_ = user.id_
-        self.email = user.email
-        self.name = user.name
-        self.memberships = user.memberships
-        self.profile_picture = user.profile_picture
-        self.active_workspace = user.active_workspace
-        self.default_workspace = user.default_workspace
-        self.settings = user.settings
-        self.status = user.status
-
-
 class Mapper:
     MAPPING_DICT = bidict()
 
@@ -111,9 +98,6 @@ class UserMapper(Mapper):
             "status": "status",
         }
     )
-
-    def to_dto(self, json_string) -> Dict:
-        return UserDTO(**super().to_dto(json.loads(json_string)))
 
 
 data = """{
@@ -168,6 +152,8 @@ data = """{
 	"status": "ACTIVE"
 }"""
 
-dto = UserMapper().to_dto(data)
-user = User(dto)
-print(user)
+api_dict = json.loads(data)
+dto_dict = UserMapper().to_dto(api_dict)
+dto = UserDTO(**dto_dict)
+
+print(dto)
