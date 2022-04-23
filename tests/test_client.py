@@ -75,3 +75,11 @@ class TestClients(ClockifyTestCase):
         self.assertRaises(
             HTTPError, self.session.get_client_by_id, self.WORKSPACE, client.id_
         )
+
+    def test_delete_client_fail(self):
+        self.assertRaises(
+            HTTPError,
+            self.session.delete_client,
+            self.WORKSPACE,
+            "this is not a project ID",
+        )

@@ -1,7 +1,11 @@
 import dataclasses
 import os
 from random import randint
-from clockify.client.client_dto import ClientDTO
+from enum import Enum
+import json
+from clockify.dto import DTO
+from clockify.client.client_dto import ClientDTO, ClientQueryDTO, SortColumn
+from clockify.client.client_mapper import ClientQueryMapper
 from clockify.session import ClockifySession
 
 KEY = os.environ.get("API_KEY")
@@ -27,6 +31,14 @@ def create_test_clients():
         session.create_client(WORKSPACE, client)
 
 
+def get_client_query():
+    q = ClientQueryDTO(sort_column=SortColumn.NAME)
+    # client = session.get_clients(WORKSPACE, q)
+    d = ClientQueryMapper().to_api(q)
+    print(d)
+
+
 if __name__ == "__main__":
-    delete_all_clients()
+    # delete_all_clients()
     # create_test_clients()
+    get_client_query()
