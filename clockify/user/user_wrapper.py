@@ -10,4 +10,4 @@ class UserWrapper(Wrapper):
 
     def get_current_user(self):
         url = "/".join([self.base_url, self.path])
-        return self.get_one(url, UserMapper, UserDTO)
+        return self.get_one(url, UserMapper(), UserDTO)
