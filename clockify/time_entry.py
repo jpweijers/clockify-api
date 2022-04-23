@@ -1,0 +1,2 @@
+class TimeEntry():
+    pass
