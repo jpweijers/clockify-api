@@ -1,4 +1,5 @@
 import dataclasses
+from attr import asdict
 import requests
 
 from clockify.mapper import Mapper
@@ -15,8 +16,8 @@ class Wrapper:
     def __inif__(self):
         pass
 
-    def get(self, url: str) -> dict:
-        res = self.session.get(url)
+    def get(self, url: str, query: dict = {}) -> dict:
+        res = self.session.get(url, params=query)
         if res.status_code == 200:
             return res.json()
         else:
@@ -47,13 +48,24 @@ class Wrapper:
         dto_dict = mapper.to_dto(res)
         return dto(**dto_dict)
 
-    def get_list(self, url: str, mapper: Mapper, dto: DTO) -> DTO:
-        res = self.get(url)
+    def get_list(
+        self,
+        url: str,
+        mapper: Mapper,
+        dto: DTO,
+        query_mapper: Mapper = None,
+        query_dto: DTO = None,
+    ) -> DTO:
+        query = {}
+        if query_mapper and query_dto:
+            query = query_mapper.to_api(query_dto)
+        res = self.get(url, query)
         dto_dicts = [mapper.to_dto(r) for r in res]
+
         return [dto(**d) for d in dto_dicts]
 
     def create_one(self, url, data: DTO, mapper: Mapper, dto: DTO) -> DTO:
-        api_dto = mapper.to_api(dataclasses.asdict(data))
+        api_dto = mapper.to_api(data)
         res = self.post(url, api_dto)
         dto_dict = mapper.to_dto(res)
         return dto(**dto_dict)

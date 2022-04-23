@@ -1,17 +1,19 @@
 from typing import List
 from clockify.wrapper import Wrapper
-from clockify.client.client_dto import ClientDTO
-from clockify.client.client_mapper import ClientMapper
+from clockify.client.client_dto import ClientDTO, ClientQueryDTO
+from clockify.client.client_mapper import ClientMapper, ClientQueryMapper
 
 
 class ClientWrapper(Wrapper):
     def __init__(self):
         pass
 
-    def get_clients(self, workspace_id: str) -> List[ClientDTO]:
+    def get_clients(
+        self, workspace_id: str, query: ClientQueryDTO = None
+    ) -> List[ClientDTO]:
         path = f"workspaces/{workspace_id}/clients"
         url = "/".join([self.base_url, path])
-        return self.get_list(url, ClientMapper(), ClientDTO)
+        return self.get_list(url, ClientMapper(), ClientDTO, ClientQueryMapper(), query)
 
     def get_client_by_id(self, workspace_id: str, client_id: str) -> ClientDTO:
         url = f"{self.base_url}/workspaces/{workspace_id}/clients/{client_id}"
