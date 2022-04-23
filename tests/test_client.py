@@ -1,4 +1,4 @@
-from random import randint
+from random import randint, sample
 from requests.exceptions import HTTPError
 from tests.test import ClockifyTestCase
 from clockify.client.client_dto import ClientDTO
@@ -9,14 +9,16 @@ class TestClients(ClockifyTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.session = ClockifySession(cls.KEY)
-        cls.created_clients = []
+        clients = [f"Test Client #{i}" for i in sample(range(0, 99999), 5)]
+        for client in clients:
+            cls.session.create_client(cls.WORKSPACE, ClientDTO(client))
         return super().setUpClass()
 
     @classmethod
     def tearDownClass(cls) -> None:
-        for client in cls.created_clients:
-            cls.session.delete_client(cls.WORKSPACE, client)
-        return super().tearDownClass()
+        clients = cls.session.get_clients(cls.WORKSPACE)
+        for client in clients:
+            cls.session.delete_client(cls.WORKSPACE, client.id_)
 
     def test_get_list_of_clients(self):
         clients = self.session.get_clients(self.WORKSPACE)
@@ -30,7 +32,6 @@ class TestClients(ClockifyTestCase):
     def test_get_client_by_id(self):
         client = ClientDTO(f"Test Get {randint(0, 99999)}")
         client = self.session.create_client(self.WORKSPACE, client)
-        self.created_clients.append(client.id_)
         client = self.session.get_client_by_id(self.WORKSPACE, client.id_)
         self.assertIsInstance(client, ClientDTO)
 
@@ -46,7 +47,6 @@ class TestClients(ClockifyTestCase):
         client = ClientDTO(f"Test Create {randint(0, 9999)}")
         client = self.session.create_client(self.WORKSPACE, client)
         self.assertIsInstance(client, ClientDTO)
-        self.created_clients.append(client.id_)
 
     def test_delete_client(self):
         client = ClientDTO(f"Test Create {randint(0, 9999)}")
