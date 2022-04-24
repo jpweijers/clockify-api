@@ -1,62 +1,44 @@
+import dataclasses
 import os
-
+from random import randint
+from enum import Enum
+import json
+from clockify.dto import DTO
+from clockify.client.client_dto import ClientDTO, ClientQueryDTO, SortColumn
+from clockify.client.client_mapper import ClientQueryMapper
 from clockify.session import ClockifySession
 
-CLOCKIFY_API_KEY = os.environ.get("CLOCKIFY_API_KEY")
+KEY = os.environ.get("API_KEY")
+WORKSPACE = os.environ.get("WORKSPACE")
 
-session = ClockifySession(CLOCKIFY_API_KEY)
-user = session.get_current_user()
-print(user)
+client = ClientDTO("1234", "Test", "abcd", "abcd", "test")
+session = ClockifySession(KEY)
+
+# res = session.create_client(WORKSPACE, client)
+# print(res)
 
 
-data = """{
-	"id": "626399702993d4192cb61234",
-	"email": "test@example.com",
-	"name": "Test User",
-	"memberships": [
-		{
-			"userId": "626399702993d4192cb61234",
-			"hourlyRate": null,
-			"costRate": null,
-			"targetId": "626399702993d4192cb61a9a",
-			"membershipType": "WORKSPACE",
-			"membershipStatus": "ACTIVE"
-		}
-	],
-	"profilePicture": "https://img.clockify.me/no-user-image.png",
-	"activeWorkspace": "626399702993d4192cb61a9a",
-	"defaultWorkspace": "626399702993d4192cb61a9a",
-	"settings": {
-		"weekStart": "MONDAY",
-		"timeZone": "Europe/Amsterdam",
-		"timeFormat": "HOUR24",
-		"dateFormat": "DD/MM/YYYY",
-		"sendNewsletter": false,
-		"weeklyUpdates": true,
-		"longRunning": true,
-		"scheduledReports": true,
-		"approval": true,
-		"pto": true,
-		"alerts": true,
-		"reminders": true,
-		"timeTrackingManual": false,
-		"summaryReportSettings": {
-			"group": "Project",
-			"subgroup": "Time Entry"
-		},
-		"isCompactViewOn": false,
-		"dashboardSelection": "ME",
-		"dashboardViewType": "PROJECT",
-		"dashboardPinToTop": false,
-		"projectListCollapse": 50,
-		"collapseAllProjectLists": false,
-		"groupSimilarEntriesDisabled": false,
-		"myStartOfDay": "09:00",
-		"projectPickerTaskFilter": false,
-		"lang": "EN",
-		"multiFactorEnabled": false,
-		"theme": "DEFAULT",
-		"scheduling": true
-	},
-	"status": "ACTIVE"
-}"""
+def delete_all_clients():
+    clients = session.get_clients(WORKSPACE)
+    for client in clients:
+        session.delete_client(WORKSPACE, client.id_)
+
+
+def create_test_clients():
+    clients = [f"Test Client #{i}" for i in range(1, 11)]
+    for client in clients:
+        client = ClientDTO(client)
+        session.create_client(WORKSPACE, client)
+
+
+def get_client_query():
+    q = ClientQueryDTO(sort_column=SortColumn.NAME)
+    # client = session.get_clients(WORKSPACE, q)
+    d = ClientQueryMapper().to_api(q)
+    print(d)
+
+
+if __name__ == "__main__":
+    # delete_all_clients()
+    # create_test_clients()
+    get_client_query()
