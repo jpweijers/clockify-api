@@ -3,10 +3,14 @@ import os
 from random import randint
 from enum import Enum
 import json
+from tkinter.tix import Tree
 from clockify.dto import DTO
 from clockify.client.client_dto import ClientDTO, ClientQueryDTO, SortColumn
 from clockify.client.client_mapper import ClientQueryMapper
+from clockify.model.project_model import Project
 from clockify.session import ClockifySession
+
+from clockify.wrapper import Wrapper
 
 KEY = os.environ.get("API_KEY")
 WORKSPACE = os.environ.get("WORKSPACE")
@@ -38,7 +42,33 @@ def get_client_query():
     print(d)
 
 
+def get_project():
+    project = session.get_project(WORKSPACE, "6264286ef7a4597cbca48059")
+    print(project)
+    print("done")
+
+
+def get_user():
+    user = session.get_current_user()
+    print(user)
+    print("done")
+
+
+def delete_project():
+    project = Project(name=f"{randint(0,9999)}", workspace_id=WORKSPACE)
+    project = session.create_project(project)
+    project.archived = True
+    project = session.update_project(project)
+    project = session.delete_project(project.workspace_id, project.id_)
+    print(project)
+    pass
+
+
 if __name__ == "__main__":
     # delete_all_clients()
     # create_test_clients()
-    get_client_query()
+    # get_client_query()
+    # get_project()
+    # get_user()
+    # print("/".join(["test", "api", None]))
+    delete_project()
