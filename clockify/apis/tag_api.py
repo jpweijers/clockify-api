@@ -17,12 +17,12 @@ class TagWrapper(Wrapper):
         url = self._url(tag.workspace_id)
         return self.create_one(url, tag, Tag)
 
-    def delete_tag(self, tag: Tag) -> Tag:
-        url = self._url(tag.workspace_id)
+    def delete_tag(self, workspace_id: str, tag_id: str) -> Tag:
+        url = self._url(workspace_id, tag_id)
         return self.delete_one(url, Tag)
 
     def update_tag(self, tag: Tag) -> Tag:
-        url = self._url(tag.workspace_id)
+        url = self._url(tag.workspace_id, tag.id_)
         return self.update_one(url, tag, Tag)
 
     def _url(self, workspace_id: str, tag_id: str = None) -> str:

@@ -82,11 +82,10 @@ class TestClients(ClockifyTestCase):
             name=f"Test Create {randint(0, 9999)}", workspace_id=self.WORKSPACE
         )
         client = self.session.create_client(client)
+        client.archived = True
+        client = self.session.update_client(client)
         client = self.session.delete_client(self.WORKSPACE, client.id_)
         self.assertIsInstance(client, Client)
-        self.assertRaises(
-            HTTPError, self.session.get_client, self.WORKSPACE, client.id_
-        )
 
     def test_delete_client_fail(self):
         self.assertRaises(
