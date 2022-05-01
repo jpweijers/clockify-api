@@ -1,2 +1,0 @@
-class TimeEntry():
-    pass
