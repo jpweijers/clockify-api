@@ -1,0 +1,25 @@
+{
+  "billable": "true",
+  "description": "Writing documentation",
+  "id": "5b0fdf2a0cb87904845dfer5",
+  "isLocked": "false",
+  "projectId": "5b1667790cb8797321f3d664",
+  "tagIds": ["5a7c5d2db079870147fra234"],
+  "taskId": "5b1e6b160cb8793dd93ec120",
+  "timeInterval": {
+    "duration": "PT2M",
+    "end": "2018-06-12T13:48:14Z",
+    "start": "2018-06-12T13:50:14Z"
+  },
+  "userId": "6h1e49bf0cb8790e43d6c9ab",
+  "workspaceId": "5g3g57bt0cb2548e22e6l9cd",
+  "customFieldValues": [
+    {
+      "customFieldId": "5b1e6b160cb8793dd93ec120",
+      "timeEntryId": "5c5bda4fb079871c518b6f07",
+      "value": "San Francisco",
+      "name": "Location",
+      "type": "TXT"
+    }
+  ]
+}

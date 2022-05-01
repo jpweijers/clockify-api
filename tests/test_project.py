@@ -18,6 +18,8 @@ class TestProject(ClockifyTestCase):
     def tearDownClass(cls) -> None:
         projects = cls.session.get_projects(cls.WORKSPACE)
         for project in projects:
+            project.archived = True
+            cls.session.update_project(project)
             cls.session.delete_project(project.workspace_id, project.id_)
 
     def test_get_projects(self):

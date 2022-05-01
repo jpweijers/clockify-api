@@ -29,7 +29,7 @@ class TestTags(ClockifyTestCase):
         for tag in tags:
             self.assertIsInstance(tag, Tag)
 
-    def tesg_get_list_of_tags_fail(self):
+    def test_get_list_of_tags_fail(self):
         self.assertRaises(HTTPError, self.session.get_tags, "fake workspace id")
 
     def test_get_tag_by_id(self):

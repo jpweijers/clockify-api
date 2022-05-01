@@ -64,6 +64,19 @@ def delete_project():
     pass
 
 
+def delete_all_projects():
+    projects = session.get_projects(WORKSPACE)
+    for project in projects:
+        project.archived = True
+        session.update_project(project)
+        session.delete_project(project.workspace_id, project.id_)
+
+
+def delete_all_tags():
+    tags = session.get_tags(WORKSPACE)
+    print(tags)
+
+
 if __name__ == "__main__":
     # delete_all_clients()
     # create_test_clients()
@@ -71,4 +84,6 @@ if __name__ == "__main__":
     # get_project()
     # get_user()
     # print("/".join(["test", "api", None]))
-    delete_project()
+    # delete_project()
+    delete_all_projects()
+    # delete_all_tags()
