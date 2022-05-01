@@ -1,0 +1,17 @@
+{
+  "assigneeIds": ["593e40aab0798735d0392a2d"],
+  "estimate": "PT0S",
+  "id": "5b1e6b160cb8793dd93ec120",
+  "name": "Task 1",
+  "projectId": "5b1667790cb8797321f3d664",
+  "billable": "true",
+  "hourlyRate": {
+    "amount": "200",
+    "currency": "USD"
+  },
+  "costRate": {
+    "amount": "100",
+    "currency": "USD"
+  },
+  "status": "ACTIVE"
+}
