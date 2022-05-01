@@ -15,8 +15,10 @@ class TestProject(ClockifyTestCase):
         return super().setUpClass()
 
     @classmethod
-    def tearDownClass(self):
-        return super().setUpClass()
+    def tearDownClass(cls) -> None:
+        projects = cls.session.get_projects(cls.WORKSPACE)
+        for project in projects:
+            cls.session.delete_project(project.workspace_id, project.id_)
 
     def test_get_projects(self):
         projects = self.session.get_projects(self.WORKSPACE)
