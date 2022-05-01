@@ -1,5 +1,5 @@
+from clockify.model.user_model import User
 from tests.test import ClockifyTestCase
-from clockify.user.user_dto import UserDTO
 from clockify.session import ClockifySession
 
 
@@ -15,4 +15,4 @@ class TestGetUser(ClockifyTestCase):
 
     def test_get_current_user(self):
         user = self.session.get_current_user()
-        self.assertIsInstance(user, UserDTO)
+        self.assertIsInstance(user, User)
