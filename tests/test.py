@@ -9,6 +9,7 @@ class ClockifyTestCase(TestCase):
     WORKSPACE = os.environ.get("WORKSPACE")
 
     CLIENT = "6263de4b5ca9a1421d1cdbaa"
+    USER = "626399702993d4192cb61a97"
 
     NON_EXISTING_CLIENT = "1234abcd"
     NON_EXISTING_WORKSPACE = "1234abcd"
