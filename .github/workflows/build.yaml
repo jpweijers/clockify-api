@@ -10,7 +10,8 @@ jobs:
         run: |
           pip install poetry
           poetry install
-          ls
+          ls -la
+          source .venv/bin/activate
       # - name: Run Tests
       #   run: |
       #     coverage run -m pytest
