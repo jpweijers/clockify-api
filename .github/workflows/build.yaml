@@ -4,8 +4,12 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: install poetry
         run: |
-          echo "This"
-          echo "is a"
-          echo "test"
+          pip install poetry
+          poetry install
+          pip freeze
+        env:
+          POETRY_VIRTUALENVS_CREATE: false
