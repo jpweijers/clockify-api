@@ -10,6 +10,7 @@ jobs:
         run: |
           pip install poetry
           poetry install
-          pip freeze
-        env:
-          POETRY_VIRTUALENVS_CREATE: false
+          poetry shell
+      - name: Run Tests
+        run: |
+          coverage run -m pytest
