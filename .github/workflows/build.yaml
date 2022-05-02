@@ -20,3 +20,6 @@ jobs:
       - name: Run Tests
         run: |
           python -m coverage run -m pytest
+        env:
+          API_KEY: ${{secrets.API_KEY}}
+          WORKSPACE: 626399702993d4192cb61a9a
