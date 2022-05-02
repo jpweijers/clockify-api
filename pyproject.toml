@@ -24,3 +24,6 @@ json2python-models = "^0.2.5"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+relative_files = true

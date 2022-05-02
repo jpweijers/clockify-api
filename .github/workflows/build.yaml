@@ -23,3 +23,10 @@ jobs:
         env:
           API_KEY: ${{secrets.API_KEY}}
           WORKSPACE: 626399702993d4192cb61a9a
+      - name: Generate lcov
+        run: python -m coverage lcov
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage.lcov
