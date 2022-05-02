@@ -12,4 +12,4 @@ jobs:
           poetry install
       - name: Run Tests
         run: |
-          coverage run -m pytest
+          python -m coverage run -m pytest
