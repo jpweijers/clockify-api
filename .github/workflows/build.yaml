@@ -6,10 +6,17 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
+      - name: setup python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
       - name: install poetry
         run: |
+          pip install -U pip
           pip install poetry
           poetry install
+        env:
+          POETRY_VIRTUALENVS_CREATE: false
       - name: Run Tests
         run: |
           python -m coverage run -m pytest
