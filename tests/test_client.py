@@ -21,8 +21,7 @@ class TestClients(ClockifyTestCase):
     def tearDownClass(cls) -> None:
         clients = cls.session.client.get_clients(cls.WORKSPACE)
         for client in clients:
-            # cls.session.client.delete_client(cls.WORKSPACE, client.id_)
-            pass
+            cls.session.client.delete_client(cls.WORKSPACE, client.id_)
 
     def test_get_list_of_clients(self):
         clients = self.session.client.get_clients(self.WORKSPACE)
