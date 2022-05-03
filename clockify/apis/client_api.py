@@ -1,13 +1,15 @@
 from typing import List
 from clockify.config import BASE_URL
-from clockify.model.client_model import Client
+from clockify.model.client_model import Client, ClientQueryParams
 from clockify.wrapper import Wrapper
 
 
 class ClientWrapper(Wrapper):
-    def get_clients(self, workspace_id: str) -> List[Client]:
+    def get_clients(
+        self, workspace_id: str, params: ClientQueryParams = ClientQueryParams()
+    ) -> List[Client]:
         url = self.__url(workspace_id)
-        return self.get_list(url, Client)
+        return self.get_list(url, params, Client)
 
     def get_client(self, workspace_id: str, client_id: str) -> Client:
         url = self.__url(workspace_id, client_id)

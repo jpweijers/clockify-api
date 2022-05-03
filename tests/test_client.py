@@ -4,7 +4,7 @@ from requests.exceptions import HTTPError
 from tests.test import ClockifyTestCase
 
 from clockify.session import ClockifySession
-from clockify.model.client_model import Client
+from clockify.model.client_model import Client, ClientQueryParams
 
 
 class TestClients(ClockifyTestCase):
@@ -32,27 +32,11 @@ class TestClients(ClockifyTestCase):
     def test_get_list_of_clients_fail(self):
         self.assertRaises(HTTPError, self.session.get_clients, "fakeworkspace")
 
-    @pytest.mark.skip
-    def test_query_name_ascending(self):
-        query = ClientQueryDTO(False, "", 1, 50, SortColumn.NAME, SortOrder.ASCENDING)
+    def test_get_list_of_clients_with_query(self):
+        query = ClientQueryParams(sort_order="ASCENDING", page_size=1)
         clients = self.session.get_clients(self.WORKSPACE, query)
         for client in clients:
-            self.assertIsInstance(client, ClientDTO)
-
-    @pytest.mark.skip
-    def test_query_id_descending(self):
-        query = ClientQueryDTO(True, "", 1, 200, SortColumn.ID, SortOrder.DESCENDING)
-        clients = self.session.get_clients(self.WORKSPACE, query)
-        for client in clients:
-            self.assertIsInstance(client, ClientDTO)
-
-    @pytest.mark.skip
-    def test_query_fail(self):
-        query = ClientQueryDTO(sort_column="FAKE")
-        self.assertRaises(HTTPError, self.session.get_clients, self.WORKSPACE, query)
-
-        query = ClientQueryDTO(sort_order="UPSIDEDOWN")
-        self.assertRaises(HTTPError, self.session.get_clients, self.WORKSPACE, query)
+            self.assertIsInstance(client, Client)
 
     def test_get_client_by_id(self):
         client = Client(

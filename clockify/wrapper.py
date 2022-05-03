@@ -46,8 +46,11 @@ class Wrapper:
         res = self._get(url)
         return schema(**res)
 
-    def get_list(self, url: str, schema: BaseModel) -> List[BaseModel]:
-        res = self._get(url)
+    def get_list(
+        self, url: str, params: BaseModel, schema: BaseModel
+    ) -> List[BaseModel]:
+        params = params.dict(exclude_unset=True)
+        res = self._get(url, params)
         return [schema(**r) for r in res]
 
     def create_one(self, url: str, object: BaseModel, schema: BaseModel) -> BaseModel:
