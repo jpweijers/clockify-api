@@ -100,3 +100,5 @@ projects = clockify_session.project.get_projects(WORKSPACE)
 
 for project in projects:
     print(f"Project {project.name}, Client: {project.client_name}")
+
+clockify_session.client.delete_client("acv", "adfasdf")

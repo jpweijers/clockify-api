@@ -8,7 +8,7 @@ class Wrapper:
         self.session = requests.Session()
         self.session.headers.update({"x-api-key": key})
 
-    def _get(self, url: str, query: dict = {}) -> dict:
+    def __get(self, url: str, query: dict = {}) -> dict:
         res = self.session.get(url, params=query)
         if res.status_code == 200:
             return res.json()
@@ -17,7 +17,7 @@ class Wrapper:
                 f"HTTP ERROR {res.status_code}: {res.reason} - {res.text}"
             )
 
-    def _post(self, url: str, payload: dict) -> dict:
+    def __post(self, url: str, payload: dict) -> dict:
         res = self.session.post(url, json=payload)
         if res.status_code == 201:
             return res.json()
@@ -26,7 +26,7 @@ class Wrapper:
                 f"HTTP ERROR {res.status_code}: {res.reason} - {res.text}"
             )
 
-    def _delete(self, url: str) -> dict:
+    def __delete(self, url: str) -> dict:
         res = self.session.delete(url)
         if res.status_code == 200:
             return res.json()
@@ -35,7 +35,7 @@ class Wrapper:
                 f"HTTP ERROR {res.status_code}: {res.reason} - {res.text}"
             )
 
-    def _put(self, url: str, payload: dict) -> dict:
+    def __put(self, url: str, payload: dict) -> dict:
         res = self.session.put(url, json=payload)
         if res.status_code == 200:
             return res.json()
@@ -44,34 +44,34 @@ class Wrapper:
                 f"HTTP ERROR {res.status_code}: {res.reason} - {res.text}"
             )
 
-    def get_one(self, url: str, schema: BaseModel) -> BaseModel:
-        res = self._get(url)
+    def _get_one(self, url: str, schema: BaseModel) -> BaseModel:
+        res = self.__get(url)
         return schema(**res)
 
-    def get_list(
+    def _get_list(
         self, url: str, schema: BaseModel, params: BaseModel = None
     ) -> List[BaseModel]:
         if params:
             params = params.dict(exclude_unset=True, by_alias=True)
         else:
             params = {}
-        res = self._get(url, params)
+        res = self.__get(url, params)
         return [schema(**r) for r in res]
 
-    def create_one(self, url: str, object: BaseModel, schema: BaseModel) -> BaseModel:
-        res = self._post(url, object.dict(exclude_unset=True, by_alias=True))
+    def _create_one(self, url: str, object: BaseModel, schema: BaseModel) -> BaseModel:
+        res = self.__post(url, object.dict(exclude_unset=True, by_alias=True))
         return schema(**res)
 
-    def delete_one(self, url: str, schema: BaseModel) -> BaseModel:
-        res = self._delete(url)
+    def _delete_one(self, url: str, schema: BaseModel) -> BaseModel:
+        res = self.__delete(url)
         return schema(**res)
 
-    def update_one(
+    def _update_one(
         self, url: str, object: BaseModel, schema: BaseModel, params: BaseModel = None
     ) -> BaseModel:
         if params:
             params = params.dict(exclude_defaults=True, by_alias=True)
         else:
             params = {}
-        res = self._put(url, object.dict(exclude_unset=True, by_alias=True))
+        res = self.__put(url, object.dict(exclude_unset=True, by_alias=True))
         return schema(**res)

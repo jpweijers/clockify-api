@@ -6,4 +6,4 @@ from clockify.wrapper import Wrapper
 class UserWrapper(Wrapper):
     def get_current_user(self) -> User:
         url = f"{BASE_URL}/user"
-        return self.get_one(url, User)
+        return self._get_one(url, User)
