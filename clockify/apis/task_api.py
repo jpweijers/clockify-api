@@ -1,13 +1,18 @@
 from typing import List
-from clockify.model.task_model import Task
+from clockify.model.task_model import Task, TaskGetParams
 from clockify.config import BASE_URL
 from clockify.wrapper import Wrapper
 
 
 class TaskApi(Wrapper):
-    def get_tasks(self, workspace_id: str, project_id: str) -> List[Task]:
+    def get_tasks(
+        self,
+        workspace_id: str,
+        project_id: str,
+        params: TaskGetParams = TaskGetParams(),
+    ) -> List[Task]:
         url = self.__url(workspace_id, project_id)
-        return self.get_list(url, Task)
+        return self.get_list(url, Task, params)
 
     def get_task(self, workspace_id: str, project_id: str, task_id: str) -> Task:
         url = self.__url(workspace_id, project_id, task_id)

@@ -3,7 +3,7 @@ from requests.exceptions import HTTPError
 from tests.test import ClockifyTestCase
 
 from clockify.session import ClockifySession
-from clockify.model.task_model import Task
+from clockify.model.task_model import Task, TaskGetParams
 from clockify.model.project_model import Project
 
 
@@ -38,6 +38,12 @@ class TestTasks(ClockifyTestCase):
             "fake workspace id",
             "fake project id",
         )
+
+    def test_get_tasks_with_params(self):
+        params = TaskGetParams(is_active=True)
+        tasks = self.session.task.get_tasks(self.WORKSPACE, self.project_id, params)
+        for task in tasks:
+            self.assertIsInstance(task, Task)
 
     def test_get_task_by_id(self):
         task = Task(name=f"Test Task #{randint(0, 99999)}", project_id=self.project_id)
