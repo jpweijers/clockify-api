@@ -4,12 +4,12 @@ from clockify.model.client_model import Client, ClientQueryParams
 from clockify.wrapper import Wrapper
 
 
-class ClientWrapper(Wrapper):
+class ClientApi(Wrapper):
     def get_clients(
         self, workspace_id: str, params: ClientQueryParams = ClientQueryParams()
     ) -> List[Client]:
         url = self.__url(workspace_id)
-        return self.get_list(url, params, Client)
+        return self.get_list(url, Client, params)
 
     def get_client(self, workspace_id: str, client_id: str) -> Client:
         url = self.__url(workspace_id, client_id)

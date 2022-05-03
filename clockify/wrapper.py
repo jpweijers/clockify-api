@@ -4,7 +4,9 @@ from pydantic import BaseModel
 
 
 class Wrapper:
-    session: requests.Session()
+    def __init__(self, key: str) -> None:
+        self.session = requests.Session()
+        self.session.headers.update({"x-api-key": key})
 
     def _get(self, url: str, query: dict = {}) -> dict:
         res = self.session.get(url, params=query)
@@ -47,9 +49,12 @@ class Wrapper:
         return schema(**res)
 
     def get_list(
-        self, url: str, params: BaseModel, schema: BaseModel
+        self, url: str, schema: BaseModel, params: BaseModel = None
     ) -> List[BaseModel]:
-        params = params.dict(exclude_unset=True)
+        try:
+            params = params.dict(exclude_unset=True)
+        except:
+            params = {}
         res = self._get(url, params)
         return [schema(**r) for r in res]
 
