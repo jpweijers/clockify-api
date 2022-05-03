@@ -2,8 +2,6 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-from clockify.user.membership.membership_dto import MembershipDTO
-from clockify.user.settings.settings_dto import SettingsDTO
 from clockify.model.enums import Weekdays
 
 
@@ -115,15 +113,3 @@ class User(BaseModel):
             "settings": "settings",
             "status": "status",
         }
-
-
-class UserDTO:
-    id_: Optional[str]
-    email: Optional[str]
-    name: str
-    memberships: Optional[List[MembershipDTO]]
-    profile_picture: Optional[str]
-    active_workspace: Optional[str]
-    default_workspace: Optional[str]
-    settings: Optional[SettingsDTO]
-    status: Optional[str]
