@@ -4,7 +4,7 @@ from clockify.config import BASE_URL
 from clockify.wrapper import Wrapper
 
 
-class TaskWrapper(Wrapper):
+class TaskApi(Wrapper):
     def get_tasks(self, workspace_id: str, project_id: str) -> List[Task]:
         url = self.__url(workspace_id, project_id)
         return self.get_list(url, Task)
