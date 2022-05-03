@@ -1,6 +1,16 @@
+[![Coverage Status](https://coveralls.io/repos/github/jpweijers/clockify-api/badge.svg?branch=main)](https://coveralls.io/github/jpweijers/clockify-api?branch=main)
+
 # Clockify
 
-[![Coverage Status](https://coveralls.io/repos/github/jpweijers/clockify-api/badge.svg?branch=main)](https://coveralls.io/github/jpweijers/clockify-api?branch=main)
+## Installation
+
+```bash
+# Pip
+pip install clockify-api
+
+# Poetry
+poetry add clockify-api
+```
 
 ## Example Usage
 
