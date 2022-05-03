@@ -1,7 +1,9 @@
+from datetime import datetime
 from typing import Any, List, Optional
 
-from pydantic import BaseModel
+# from pydantic import BaseModel
 
+from clockify.model.base_model import BaseModel
 from clockify.model.user_model import User
 from clockify.model.tag_model import Tag
 from clockify.model.task_model import Task
@@ -54,4 +56,36 @@ class TimeEntry(BaseModel):
 
 
 class TimeEntryGetParams(BaseModel):
+    description: Optional[str]
+    start: Optional[str]
+    end: Optional[str]
+    project: Optional[str]
+    task: Optional[str]
+    tags: Optional[List[str]]
+    project_required: Optional[bool]
+    task_required: Optional[bool]
     hydrated: Optional[bool]
+    in_progress: Optional[bool]
+    page: Optional[int] = 1
+    page_size: Optional[int] = 50
+
+
+class CreateTimeEntryDTO(BaseModel):
+    start: datetime
+    end: datetime
+    billable: bool = True
+    description: str
+    project_id: Optional[str]
+    task_id: Optional[str]
+    tag_ids: Optional[List[str]]
+
+    class Config:
+        allow_population_by_field_name = True
+        fields = {"project_id": "projectId", "task_id": "taskId", "tag_ids": "tagIds"}
+
+    # def dict(self, **kwargs):
+    #     dict = super().dict(**kwargs)
+    #     for k, v in dict.items():
+    #         if type(v) == datetime:
+    #             dict[k] = v.isoformat()[:19] + "Z"
+    #     return dict

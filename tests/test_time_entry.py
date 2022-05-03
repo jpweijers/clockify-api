@@ -1,4 +1,9 @@
-from clockify.model.time_entry_model import TimeEntry, TimeEntryGetParams
+from datetime import datetime, timedelta
+from clockify.model.time_entry_model import (
+    CreateTimeEntryDTO,
+    TimeEntry,
+    TimeEntryGetParams,
+)
 from tests.test import ClockifyTestCase
 
 
@@ -28,3 +33,14 @@ class TestTimeEntries(ClockifyTestCase):
             )
             self.assertIsInstance(search_time_entry, TimeEntry)
             self.assertEqual(search_time_entry, time_entry)
+
+    def test_create_time_entry(self):
+        start = datetime.now()
+        end = start + timedelta(minutes=30)
+        time_entry_data = CreateTimeEntryDTO(
+            start=start, end=end, description="Test Time Entry"
+        )
+        time_entry = self.session.time_entry.add_time_entry(
+            self.WORKSPACE, self.USER, time_entry_data
+        )
+        self.assertIsInstance(time_entry, TimeEntry)

@@ -35,8 +35,8 @@ class Wrapper:
                 f"HTTP ERROR {res.status_code}: {res.reason} - {res.text}"
             )
 
-    def __put(self, url: str, payload: dict) -> dict:
-        res = self.session.put(url, json=payload)
+    def __put(self, url: str, payload: dict, params: dict) -> dict:
+        res = self.session.put(url, json=payload, params=params)
         if res.status_code == 200:
             return res.json()
         else:
@@ -52,14 +52,14 @@ class Wrapper:
         self, url: str, schema: BaseModel, params: BaseModel = None
     ) -> List[BaseModel]:
         if params:
-            params = params.dict(exclude_unset=True, by_alias=True)
+            params = params.dict()
         else:
             params = {}
         res = self.__get(url, params)
         return [schema(**r) for r in res]
 
     def _create_one(self, url: str, object: BaseModel, schema: BaseModel) -> BaseModel:
-        res = self.__post(url, object.dict(exclude_unset=True, by_alias=True))
+        res = self.__post(url, object.dict())
         return schema(**res)
 
     def _delete_one(self, url: str, schema: BaseModel) -> BaseModel:
@@ -70,8 +70,8 @@ class Wrapper:
         self, url: str, object: BaseModel, schema: BaseModel, params: BaseModel = None
     ) -> BaseModel:
         if params:
-            params = params.dict(exclude_defaults=True, by_alias=True)
+            params = params.dict()
         else:
             params = {}
-        res = self.__put(url, object.dict(exclude_unset=True, by_alias=True))
+        res = self.__put(url, object.dict(), params)
         return schema(**res)
