@@ -1,12 +1,12 @@
 from typing import List
 from clockify.config import BASE_URL
-from clockify.model.client_model import Client, ClientQueryParams
+from clockify.model.client_model import Client, ClientGetParams, ClientUpdateParams
 from clockify.wrapper import Wrapper
 
 
 class ClientApi(Wrapper):
     def get_clients(
-        self, workspace_id: str, params: ClientQueryParams = ClientQueryParams()
+        self, workspace_id: str, params: ClientGetParams = ClientGetParams()
     ) -> List[Client]:
         url = self.__url(workspace_id)
         return self.get_list(url, Client, params)
@@ -23,9 +23,11 @@ class ClientApi(Wrapper):
         url = self.__url(workspace_id, client_id)
         return self.delete_one(url, Client)
 
-    def update_client(self, client: Client) -> Client:
+    def update_client(
+        self, client: Client, params: ClientUpdateParams = ClientUpdateParams()
+    ) -> Client:
         url = self.__url(client.workspace_id, client.id_)
-        return self.update_one(url, client, Client)
+        return self.update_one(url, client, Client, params)
 
     def __url(self, workspace_id: str, client_id: str = None) -> str:
         url = f"{BASE_URL}/workspaces/{workspace_id}/clients"

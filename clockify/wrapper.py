@@ -52,7 +52,7 @@ class Wrapper:
         self, url: str, schema: BaseModel, params: BaseModel = None
     ) -> List[BaseModel]:
         try:
-            params = params.dict(exclude_unset=True)
+            params = params.dict(exclude_unset=True, by_alias=True)
         except:
             params = {}
         res = self._get(url, params)
@@ -66,6 +66,12 @@ class Wrapper:
         res = self._delete(url)
         return schema(**res)
 
-    def update_one(self, url: str, object: BaseModel, schema: BaseModel) -> BaseModel:
+    def update_one(
+        self, url: str, object: BaseModel, schema: BaseModel, params: BaseModel = None
+    ) -> BaseModel:
+        if params:
+            params = params.dict(exclude_defaults=True, by_alias=True)
+        else:
+            params = {}
         res = self._put(url, object.dict(exclude_unset=True, by_alias=True))
         return schema(**res)

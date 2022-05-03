@@ -4,7 +4,7 @@ from requests.exceptions import HTTPError
 from tests.test import ClockifyTestCase
 
 from clockify.session import ClockifySession
-from clockify.model.client_model import Client, ClientQueryParams
+from clockify.model.client_model import Client, ClientGetParams, ClientUpdateParams
 
 
 class TestClients(ClockifyTestCase):
@@ -21,7 +21,8 @@ class TestClients(ClockifyTestCase):
     def tearDownClass(cls) -> None:
         clients = cls.session.client.get_clients(cls.WORKSPACE)
         for client in clients:
-            cls.session.client.delete_client(cls.WORKSPACE, client.id_)
+            # cls.session.client.delete_client(cls.WORKSPACE, client.id_)
+            pass
 
     def test_get_list_of_clients(self):
         clients = self.session.client.get_clients(self.WORKSPACE)
@@ -33,7 +34,7 @@ class TestClients(ClockifyTestCase):
         self.assertRaises(HTTPError, self.session.client.get_clients, "fakeworkspace")
 
     def test_get_list_of_clients_with_query(self):
-        query = ClientQueryParams(sort_order="ASCENDING", page_size=1)
+        query = ClientGetParams(sort_order="ASCENDING", page_size=1)
         clients = self.session.client.get_clients(self.WORKSPACE, query)
         for client in clients:
             self.assertIsInstance(client, Client)
@@ -63,11 +64,9 @@ class TestClients(ClockifyTestCase):
 
     def test_delete_client(self):
         client = Client(
-            name=f"Test Create {randint(0, 9999)}", workspace_id=self.WORKSPACE
+            name=f"Test Delete {randint(0, 9999)}", workspace_id=self.WORKSPACE
         )
         client = self.session.client.create_client(client)
-        client.archived = True
-        client = self.session.client.update_client(client)
         client = self.session.client.delete_client(self.WORKSPACE, client.id_)
         self.assertIsInstance(client, Client)
 
@@ -78,3 +77,13 @@ class TestClients(ClockifyTestCase):
             self.WORKSPACE,
             "this is not a client ID",
         )
+
+    def test_update_client(self):
+        client = Client(
+            name=f"Test Client {randint(0, 9999)}", workspace_id=self.WORKSPACE
+        )
+        client = self.session.client.create_client(client)
+        client.archived = True
+        params = ClientUpdateParams(archive_projects=True)
+        client = self.session.client.update_client(client, params)
+        self.assertIsInstance(client, Client)

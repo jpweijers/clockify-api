@@ -17,7 +17,7 @@ class Client(BaseModel):
         fields = {"id_": "id", "workspace_id": "workspaceId"}
 
 
-class ClientQueryParams(BaseModel):
+class ClientGetParams(BaseModel):
     archived: bool = None
     name: str = None
     page: int = 1
@@ -32,3 +32,11 @@ class ClientQueryParams(BaseModel):
             "sort_column": "sort-column",
             "sort_order": "sort-order",
         }
+
+
+class ClientUpdateParams(BaseModel):
+    archive_projects: bool = None
+
+    class Config:
+        allow_population_by_field_name = True
+        fields = {"archive_projects": "archive-projects"}
