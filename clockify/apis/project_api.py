@@ -1,13 +1,15 @@
 from typing import List
-from clockify.model.project_model import Project
+from clockify.model.project_model import Project, ProjectGetParams
 from clockify.config import BASE_URL
 from clockify.wrapper import Wrapper
 
 
-class ProjectWrapper(Wrapper):
-    def get_projects(self, workspace_id: str) -> List[Project]:
+class ProjectApi(Wrapper):
+    def get_projects(
+        self, workspace_id: str, params: ProjectGetParams = ProjectGetParams()
+    ) -> List[Project]:
         url = self.__url(workspace_id)
-        return self.get_list(url, Project)
+        return self.get_list(url, Project, params)
 
     def get_project(self, workspace_id: str, project_id: str) -> Project:
         url = self.__url(workspace_id, project_id)

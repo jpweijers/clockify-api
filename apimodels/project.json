@@ -1,0 +1,43 @@
+[
+  {
+    "id": "6270be4de7dfba35378a17c8",
+    "name": "Fietsen",
+    "hourlyRate": {
+      "amount": 0,
+      "currency": "EUR"
+    },
+    "clientId": "6270beb41541a913164571d1",
+    "workspaceId": "626399702993d4192cb61a9a",
+    "billable": true,
+    "memberships": [
+      {
+        "userId": "626399702993d4192cb61a97",
+        "hourlyRate": null,
+        "costRate": null,
+        "targetId": "6270be4de7dfba35378a17c8",
+        "membershipType": "PROJECT",
+        "membershipStatus": "ACTIVE"
+      }
+    ],
+    "color": "#00BCD4",
+    "estimate": {
+      "estimate": "PT0S",
+      "type": "AUTO"
+    },
+    "archived": false,
+    "duration": "PT1S",
+    "clientName": "Test Client",
+    "note": "",
+    "costRate": null,
+    "timeEstimate": {
+      "estimate": "PT0S",
+      "type": "AUTO",
+      "resetOption": null,
+      "active": false,
+      "includeNonBillable": true
+    },
+    "budgetEstimate": null,
+    "template": false,
+    "public": false
+  }
+]

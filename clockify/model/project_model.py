@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Required
 
-from typing import Optional, List
+from typing import Literal, Optional, List
 
 
 class HourlyRate(BaseModel):
@@ -99,4 +99,35 @@ class Project(BaseModel):
             "budget_estimate": "budgetEstimate",
             "template": "template",
             "public_": "public",
+        }
+
+
+class ProjectGetParams(BaseModel):
+    hydrated: Optional[bool]
+    archived: Optional[bool]
+    name: Optional[str]
+    page: int = 1
+    page_size: int = 50
+    billable: Optional[bool]
+    clients: Optional[List[str]]
+    contains_client: Optional[bool]
+    client_status: Optional[Literal["ACTIVE", "ARCHIVED"]]
+    users: Optional[List[str]]
+    contains_users: Optional[bool]
+    user_status: Optional[Literal["ACTIVE", "ARCHIVED"]]
+    is_template: Optional[bool]
+    sort_column: Optional[Literal["NAME", "CLIENT_NAME", "DURATION"]]
+    sort_order: Optional[Literal["ASCENDING", "DESCENDING"]]
+
+    class Config:
+        allow_population_by_field_name = True
+        fields = {
+            "page_size": "page-size",
+            "contains_client": "contains-client",
+            "client_status": "client-status",
+            "contains_users": "contains-users",
+            "user_status": "user-status",
+            "is_template": "is-template",
+            "sort_column": "sort-column",
+            "sort_order": "sort-order",
         }
