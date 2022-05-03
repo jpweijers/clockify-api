@@ -4,7 +4,7 @@ from clockify.model.tag_model import Tag, TagGetParams
 from clockify.wrapper import Wrapper
 
 
-class TagWrapper(Wrapper):
+class TagApi(Wrapper):
     def get_tags(
         self, workspace_id: str, params: TagGetParams = TagGetParams()
     ) -> List[Tag]:

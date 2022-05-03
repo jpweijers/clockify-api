@@ -4,12 +4,11 @@ from clockify.apis.task_api import TaskWrapper
 from clockify.apis.time_entry_api import TimeEntryWrapper
 from clockify.apis.user import UserWrapper
 from clockify.apis.client_api import ClientApi
-from clockify.apis.tag_api import TagWrapper
+from clockify.apis.tag_api import TagApi
 
 
 class ClockifySession(
     UserWrapper,
-    TagWrapper,
     TaskWrapper,
     TimeEntryWrapper,
 ):
@@ -19,3 +18,4 @@ class ClockifySession(
 
         self.client = ClientApi(key)
         self.project = ProjectApi(key)
+        self.tag = TagApi(key)
