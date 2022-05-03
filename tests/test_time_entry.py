@@ -73,6 +73,7 @@ class TestTimeEntries(ClockifyTestCase):
             task_id=task.id_,
             tag_ids=[tag.id_],
         )
+        params = TimeEntryGetParams(hydrated=True)
         time_entry = self.session.time_entry.add_time_entry(
             self.WORKSPACE, self.USER, time_entry_data
         )
