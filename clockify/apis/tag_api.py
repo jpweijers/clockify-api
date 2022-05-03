@@ -1,13 +1,15 @@
 from typing import List
 from clockify.config import BASE_URL
-from clockify.model.tag_model import Tag
+from clockify.model.tag_model import Tag, TagGetParams
 from clockify.wrapper import Wrapper
 
 
 class TagWrapper(Wrapper):
-    def get_tags(self, workspace_id: str) -> List[Tag]:
+    def get_tags(
+        self, workspace_id: str, params: TagGetParams = TagGetParams()
+    ) -> List[Tag]:
         url = self.__url(workspace_id)
-        return self.get_list(url, Tag)
+        return self.get_list(url, Tag, params)
 
     def get_tag(self, workspace_id: str, tag_id: str) -> Tag:
         url = self.__url(workspace_id, tag_id)

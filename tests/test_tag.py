@@ -4,7 +4,7 @@ from requests.exceptions import HTTPError
 from tests.test import ClockifyTestCase
 
 from clockify.session import ClockifySession
-from clockify.model.tag_model import Tag
+from clockify.model.tag_model import Tag, TagGetParams
 
 
 class TestTags(ClockifyTestCase):
@@ -31,6 +31,12 @@ class TestTags(ClockifyTestCase):
 
     def test_get_list_of_tags_fail(self):
         self.assertRaises(HTTPError, self.session.get_tags, "fake workspace id")
+
+    def test_get_tags_with_params(self):
+        params = TagGetParams(archived=False)
+        tags = self.session.get_tags(self.WORKSPACE, params)
+        for tag in tags:
+            self.assertIsInstance(tag, Tag)
 
     def test_get_tag_by_id(self):
         tag = Tag(name=f"Test Tag #{randint(0, 99999)}", workspace_id=self.WORKSPACE)

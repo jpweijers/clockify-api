@@ -10,12 +10,11 @@ from clockify.model.client_model import Client, ClientGetParams, ClientUpdatePar
 class TestClients(ClockifyTestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.session = ClockifySession(cls.KEY)
+        super().setUpClass()
         client_names = [f"Test Client #{i}" for i in sample(range(0, 99999), 5)]
         for name in client_names:
             client = Client(name=name, workspace_id=cls.WORKSPACE)
             cls.session.client.create_client(client)
-        return super().setUpClass()
 
     @classmethod
     def tearDownClass(cls) -> None:

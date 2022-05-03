@@ -7,20 +7,15 @@ from tests.test import ClockifyTestCase
 class TestProject(ClockifyTestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.session = ClockifySession(cls.KEY)
+        super().setUpClass()
         project_names = [f"Test Project #{i}" for i in sample(range(0, 99999), 5)]
         for name in project_names:
             project = Project(name=name, workspace_id=cls.WORKSPACE)
             cls.session.project.create_project(project)
-        return super().setUpClass()
 
     @classmethod
     def tearDownClass(cls) -> None:
-        projects = cls.session.project.get_projects(cls.WORKSPACE)
-        for project in projects:
-            project.archived = True
-            cls.session.project.update_project(project)
-            cls.session.project.delete_project(project.workspace_id, project.id_)
+        super().tearDownClass()
 
     def test_get_projects(self):
         projects = self.session.project.get_projects(self.WORKSPACE)

@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -11,5 +12,13 @@ class Tag(BaseModel):
         allow_population_by_field_name = True
         fields = {"id_": "id", "workspace_id": "workspaceId"}
 
-    def json(self):
-        return super().json(exclude_unset=True)
+
+class TagGetParams(BaseModel):
+    name: Optional[str]
+    archived: Optional[bool]
+    page: int = 1
+    page_size: int = 50
+
+    class Config:
+        allow_population_by_field_name = True
+        fields = {"page_size": "page-size"}

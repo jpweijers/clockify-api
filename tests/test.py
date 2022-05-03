@@ -21,9 +21,9 @@ class ClockifyTestCase(TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        projects = cls.session.get_projects(cls.WORKSPACE)
+        projects = cls.session.project.get_projects(cls.WORKSPACE)
         for project in projects:
             project.archived = True
-            cls.session.update_project(project)
-            cls.session.delete_project(cls.WORKSPACE, project.id_)
+            cls.session.project.update_project(project)
+            cls.session.project.delete_project(cls.WORKSPACE, project.id_)
         return super().tearDownClass()

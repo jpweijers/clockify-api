@@ -51,9 +51,9 @@ class Wrapper:
     def get_list(
         self, url: str, schema: BaseModel, params: BaseModel = None
     ) -> List[BaseModel]:
-        try:
+        if params:
             params = params.dict(exclude_unset=True, by_alias=True)
-        except:
+        else:
             params = {}
         res = self._get(url, params)
         return [schema(**r) for r in res]
