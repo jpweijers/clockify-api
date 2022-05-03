@@ -1,25 +1,119 @@
-{
-  "billable": "true",
-  "description": "Writing documentation",
-  "id": "5b0fdf2a0cb87904845dfer5",
-  "isLocked": "false",
-  "projectId": "5b1667790cb8797321f3d664",
-  "tagIds": ["5a7c5d2db079870147fra234"],
-  "taskId": "5b1e6b160cb8793dd93ec120",
-  "timeInterval": {
-    "duration": "PT2M",
-    "end": "2018-06-12T13:48:14Z",
-    "start": "2018-06-12T13:50:14Z"
-  },
-  "userId": "6h1e49bf0cb8790e43d6c9ab",
-  "workspaceId": "5g3g57bt0cb2548e22e6l9cd",
-  "customFieldValues": [
-    {
-      "customFieldId": "5b1e6b160cb8793dd93ec120",
-      "timeEntryId": "5c5bda4fb079871c518b6f07",
-      "value": "San Francisco",
-      "name": "Location",
-      "type": "TXT"
-    }
-  ]
-}
+[
+  {
+    "id": "627155da36c2670314d35618",
+    "description": "Eating Pizza",
+    "tags": [],
+    "user": {
+      "id": "626399702993d4192cb61a97",
+      "email": "jeanpaulweijers+clockify@gmail.com",
+      "name": "Test User",
+      "memberships": [],
+      "profilePicture": "https://img.clockify.me/no-user-image.png",
+      "activeWorkspace": "626399702993d4192cb61a9a",
+      "defaultWorkspace": "626399702993d4192cb61a9a",
+      "settings": {
+        "weekStart": "MONDAY",
+        "timeZone": "Europe/Amsterdam",
+        "timeFormat": "HOUR24",
+        "dateFormat": "DD/MM/YYYY",
+        "sendNewsletter": false,
+        "weeklyUpdates": false,
+        "longRunning": false,
+        "scheduledReports": false,
+        "approval": false,
+        "pto": false,
+        "alerts": false,
+        "reminders": false,
+        "timeTrackingManual": false,
+        "summaryReportSettings": {
+          "group": "Project",
+          "subgroup": "Time Entry"
+        },
+        "isCompactViewOn": false,
+        "dashboardSelection": "ME",
+        "dashboardViewType": "PROJECT",
+        "dashboardPinToTop": false,
+        "projectListCollapse": 50,
+        "collapseAllProjectLists": false,
+        "groupSimilarEntriesDisabled": false,
+        "myStartOfDay": "09:00",
+        "projectPickerTaskFilter": false,
+        "lang": "EN",
+        "multiFactorEnabled": false,
+        "theme": "DEFAULT",
+        "scheduling": false
+      },
+      "status": "ACTIVE"
+    },
+    "billable": true,
+    "task": {
+      "id": "627155d7e7dfba353794be35",
+      "name": "Tasting",
+      "projectId": "627155b4736b43623afe3e6d",
+      "assigneeIds": [],
+      "assigneeId": null,
+      "userGroupIds": [],
+      "estimate": "PT0S",
+      "status": "ACTIVE",
+      "duration": "PT3S",
+      "billable": true,
+      "hourlyRate": null,
+      "costRate": null
+    },
+    "project": {
+      "id": "627155b4736b43623afe3e6d",
+      "name": "Snacking",
+      "hourlyRate": {
+        "amount": 0,
+        "currency": "EUR"
+      },
+      "clientId": "",
+      "workspaceId": "626399702993d4192cb61a9a",
+      "billable": true,
+      "memberships": [
+        {
+          "userId": "626399702993d4192cb61a97",
+          "hourlyRate": null,
+          "costRate": null,
+          "targetId": "627155b4736b43623afe3e6d",
+          "membershipType": "PROJECT",
+          "membershipStatus": "ACTIVE"
+        }
+      ],
+      "color": "#795548",
+      "estimate": {
+        "estimate": "PT0S",
+        "type": "AUTO"
+      },
+      "archived": false,
+      "duration": "PT0S",
+      "clientName": "",
+      "note": "",
+      "costRate": null,
+      "timeEstimate": {
+        "estimate": "PT0S",
+        "type": "AUTO",
+        "resetOption": null,
+        "active": false,
+        "includeNonBillable": true
+      },
+      "budgetEstimate": null,
+      "template": false,
+      "public": false
+    },
+    "timeInterval": {
+      "start": "2022-05-03T16:18:34Z",
+      "end": "2022-05-03T16:18:36Z",
+      "duration": "PT2S"
+    },
+    "workspaceId": "626399702993d4192cb61a9a",
+    "hourlyRate": {
+      "amount": 9995,
+      "currency": null
+    },
+    "userId": "626399702993d4192cb61a97",
+    "customFieldValues": [],
+    "projectId": "627155b4736b43623afe3e6d",
+    "isLocked": false
+  }
+]
