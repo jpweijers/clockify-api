@@ -1,6 +1,7 @@
 from typing import List
 import requests
-from pydantic import BaseModel
+
+from clockify.model.base_model import BaseModel
 
 
 class Wrapper:
@@ -52,14 +53,14 @@ class Wrapper:
         self, url: str, schema: BaseModel, params: BaseModel = None
     ) -> List[BaseModel]:
         if params:
-            params = params.dict()
+            params = params.json_dict()
         else:
             params = {}
         res = self.__get(url, params)
         return [schema(**r) for r in res]
 
     def _create_one(self, url: str, object: BaseModel, schema: BaseModel) -> BaseModel:
-        res = self.__post(url, object.dict())
+        res = self.__post(url, object.json_dict())
         return schema(**res)
 
     def _delete_one(self, url: str, schema: BaseModel) -> BaseModel:
@@ -70,8 +71,8 @@ class Wrapper:
         self, url: str, object: BaseModel, schema: BaseModel, params: BaseModel = None
     ) -> BaseModel:
         if params:
-            params = params.dict()
+            params = params.json_dict()
         else:
             params = {}
-        res = self.__put(url, object.dict(), params)
+        res = self.__put(url, object.json_dict(), params)
         return schema(**res)

@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
 from typing import List, Literal, Optional
+
+from clockify.model.base_model import BaseModel
 
 
 class CostRate_HourlyRate(BaseModel):
@@ -19,7 +20,6 @@ class Task(BaseModel):
     status: Literal["ACTIVE", "Done"] = None
 
     class Config:
-        allow_population_by_field_name = True
         fields = {
             "id_": "id",
             "project_id": "projectId",
@@ -39,7 +39,6 @@ class TaskGetParams(BaseModel):
     sort_order: Optional[Literal["ASCENDING", "DESCENDING"]]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {
             "is_active": "is-active",
             "page_size": "page-size",

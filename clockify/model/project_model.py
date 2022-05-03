@@ -1,6 +1,6 @@
-from pydantic import BaseModel, Required
-
 from typing import Literal, Optional, List
+
+from clockify.model.base_model import BaseModel
 
 
 class HourlyRate(BaseModel):
@@ -8,24 +8,22 @@ class HourlyRate(BaseModel):
     currency: Optional[str]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {"ammount": "amount", "amount": "amount"}
 
 
 class MemberShip(BaseModel):
     user_Id: Optional[str]
-    hourly_Rate: Optional[str]
-    cost_Rate: Optional[str]
+    hourly_rate: Optional[str]
+    cost_rate: Optional[str]
     target_Id: Optional[str]
     membership_Type: Optional[str]
     membership_Status: Optional[str]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {
             "user_Id": "userId",
-            "hourly_Rate": "hourlyRate",
-            "cost_Rate": "costRate",
+            "hourly_rate": "hourlyRate",
+            "cost_rate": "costRate",
             "target_Id": "targetId",
             "membership_Type": "membershipType",
             "membership_Status": "membershipStatus",
@@ -48,7 +46,6 @@ class TimeEstimate(BaseModel):
     include_non_billable: Optional[bool]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {
             "estimate": "estimate",
             "type": "type",
@@ -79,7 +76,6 @@ class Project(BaseModel):
     public_: Optional[bool]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {
             "id_": "id",
             "name": "name",
@@ -120,7 +116,6 @@ class ProjectGetParams(BaseModel):
     sort_order: Optional[Literal["ASCENDING", "DESCENDING"]]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {
             "page_size": "page-size",
             "contains_client": "contains-client",

@@ -1,5 +1,6 @@
 from typing import Optional
-from pydantic import BaseModel
+
+from clockify.model.base_model import BaseModel
 
 
 class Tag(BaseModel):
@@ -9,7 +10,6 @@ class Tag(BaseModel):
     archived: bool = False
 
     class Config:
-        allow_population_by_field_name = True
         fields = {"id_": "id", "workspace_id": "workspaceId"}
 
 
@@ -20,5 +20,4 @@ class TagGetParams(BaseModel):
     page_size: int = 50
 
     class Config:
-        allow_population_by_field_name = True
         fields = {"page_size": "page-size"}

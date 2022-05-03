@@ -26,4 +26,9 @@ class ClockifyTestCase(TestCase):
             project.archived = True
             cls.session.project.update_project(project)
             cls.session.project.delete_project(cls.WORKSPACE, project.id_)
+        tags = cls.session.tag.get_tags(cls.WORKSPACE)
+        for tag in tags:
+            tag.archived = True
+            cls.session.tag.update_tag(tag)
+            cls.session.tag.delete_tag(cls.WORKSPACE, tag.id_)
         return super().tearDownClass()

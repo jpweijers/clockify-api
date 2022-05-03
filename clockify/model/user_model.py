@@ -1,8 +1,6 @@
-from typing import List, Optional
+from typing import List, Literal, Optional
 
-from pydantic import BaseModel
-
-from clockify.model.enums import Weekdays
+from clockify.model.base_model import BaseModel
 
 
 class Membership(BaseModel):
@@ -30,7 +28,17 @@ class SummaryReportSettings(BaseModel):
 
 
 class Settings(BaseModel):
-    week_start: Optional[Weekdays]
+    week_start: Optional[
+        Literal[
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY",
+        ]
+    ]
     time_zone: Optional[str]
     time_format: Optional[str]
     date_format: Optional[str]

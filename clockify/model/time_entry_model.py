@@ -1,8 +1,6 @@
 from datetime import datetime
 from typing import Any, List, Optional
 
-# from pydantic import BaseModel
-
 from clockify.model.base_model import BaseModel
 from clockify.model.user_model import User
 from clockify.model.tag_model import Tag
@@ -40,7 +38,6 @@ class TimeEntry(BaseModel):
     is_locked: Optional[bool]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {
             "id_": "id",
             "tag_ids": "tagIds",
@@ -80,12 +77,4 @@ class CreateTimeEntryDTO(BaseModel):
     tag_ids: Optional[List[str]]
 
     class Config:
-        allow_population_by_field_name = True
         fields = {"project_id": "projectId", "task_id": "taskId", "tag_ids": "tagIds"}
-
-    # def dict(self, **kwargs):
-    #     dict = super().dict(**kwargs)
-    #     for k, v in dict.items():
-    #         if type(v) == datetime:
-    #             dict[k] = v.isoformat()[:19] + "Z"
-    #     return dict
