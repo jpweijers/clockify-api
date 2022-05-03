@@ -87,3 +87,16 @@ if __name__ == "__main__":
     # delete_project()
     delete_all_projects()
     # delete_all_tags()
+
+
+from clockify.session import ClockifySession
+
+KEY = "YOUR_API KEY"
+WORKSPACE = "YOUR WORKSPACE ID"
+
+clockify_session = ClockifySession(KEY)
+
+projects = clockify_session.project.get_projects(WORKSPACE)
+
+for project in projects:
+    print(f"Project {project.name}, Client: {project.client_name}")
