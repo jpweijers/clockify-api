@@ -11,6 +11,11 @@ class ClockifySession(
     UserWrapper,
 ):
     def __init__(self, key: str) -> None:
+        """Initialize a Clockfiy Session
+
+        Args:
+            key (str): Your Clockify API Key
+        """
         self.session = requests.Session()
         self.session.headers.update({"x-api-key": key})
 

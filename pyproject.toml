@@ -13,7 +13,6 @@ bidict = "^0.22.0"
 requests = "^2.27.1"
 marshmallow = "^3.15.0"
 pydantic = "^1.9.0"
-Sphinx = "^4.5.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"
@@ -21,6 +20,8 @@ pytest = "^7.1.1"
 coverage = "^6.3.2"
 isort = "^5.10.1"
 json2python-models = "^0.2.5"
+sphinx-rtd-theme = "^1.0.0"
+Sphinx = "^4.5.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

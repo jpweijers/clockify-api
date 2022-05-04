@@ -7,10 +7,12 @@ Welcome to Clockify-API's documentation!
 ========================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
-  clockify
+  rst/modules
+  rst/apis/modules
+  rst/model/modules
 
 Indices and tables
 ==================
