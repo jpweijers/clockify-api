@@ -10,7 +10,7 @@ Welcome to Clockify-API's documentation!
    :maxdepth: 1
    :caption: Contents:
 
-  rst/modules
+  rst/usage/quickstart
   rst/apis/modules
   rst/model/modules
 
