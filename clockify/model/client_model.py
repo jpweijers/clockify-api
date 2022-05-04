@@ -1,4 +1,4 @@
-from typing_extensions import Litera
+from typing_extensions import Literal
 
 from clockify.model.base_model import BaseModel
 
