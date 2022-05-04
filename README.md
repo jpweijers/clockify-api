@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/jpweijers/clockify-api/badge.svg?branch=main)](https://coveralls.io/github/jpweijers/clockify-api?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/jpweijers/clockify-api/badge.svg?branch=main)](https://coveralls.io/github/jpweijers/clockify-api?branch=main)[![Documentation Status](https://readthedocs.org/projects/clockify-api/badge/?version=latest)](https://clockify-api.readthedocs.io/en/latest/?badge=latest)
 
 # Clockify
 
