@@ -1,4 +1,5 @@
-from typing import List, Literal, Optional
+from typing import List, Optional
+from typing_extensions import Literal
 
 from clockify.model.base_model import BaseModel
 
