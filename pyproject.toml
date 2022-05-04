@@ -1,11 +1,14 @@
 [tool.poetry]
 name = "clockify-api"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python wrapper for Clockify's API."
 authors = ["Jean-Paul Weijers <jpweijers@users.noreply.github.com>"]
 packages = [
   {include = "clockify"}
 ]
+repository="https://github.com/jpweijers/clockify-api"
+readme="README.md"
+documentation="https://clockify-api.readthedocs.io/"
 
 [tool.poetry.dependencies]
 python = "^3.8"
