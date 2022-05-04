@@ -13,6 +13,7 @@ bidict = "^0.22.0"
 requests = "^2.27.1"
 marshmallow = "^3.15.0"
 pydantic = "^1.9.0"
+Sphinx = "^4.5.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"
